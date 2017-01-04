@@ -1,19 +1,17 @@
 import json
 import oauth2 as oauth
 import time
-print "hello"
-
 
 def filter_complaints(tweets):
 	i=1
 	for tweet in tweets:
 		for hashtag in tweet['entities']['hashtags']: 
-			print hashtag
 			if hashtag['text'] == 'complaint':
 				print tweet['text'],'-----------',tweet['id']
 				if i == 1:
 					since_id=tweet['id_str']
 					i=i+1
+	return since_id
 
 
 
@@ -53,6 +51,6 @@ while True:
 
 	#print data
 	tweets=json.loads(data)
-	filter_complaints(tweets)
-	time.sleep(120)
+	since_id=filter_complaints(tweets)
+	time.sleep(30)
 
